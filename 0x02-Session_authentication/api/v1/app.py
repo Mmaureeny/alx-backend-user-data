@@ -51,6 +51,10 @@ def forbidden(error) -> str:
     """
     return jsonify({"error": "Forbidden"}), 403
 
+@app.before_request
+def before_request():
+    request.current_user = auth.current_user(request)
+
 
 @app.before_request
 def authenticate_user():
